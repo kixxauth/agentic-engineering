@@ -52,6 +52,24 @@ Cases the author did not think about. These cannot be "handled" because, by defi
 
 Do not catch-and-swallow. Do not convert a programmer error into an operational error. Let it propagate until the process crashes (or is logged and crashed at the top level).
 
+## Type checking errors
+
+DO NOT use `instanceof` when checking for the type of an error. Instead, use the `error.name` or `error.code` in your error handling logic:
+
+```javascript
+try {
+    readFile(input);
+} catch (cause) {
+    if (cause.name === 'ParsingError') {
+        return 'Invalid file format';
+    }
+    if (cause.code === 'ENOENT') {
+        return null;
+    }
+    throw new OperationalError('Error reading file', { cause });
+}
+```
+
 ## Assumptions → Assertions
 
 The way we protect against unexpected errors is to write down our assumptions as **assertions** at the boundaries of our code. An assertion that fails is a loud, immediate crash with a precise message — exactly what you want for a bug.

@@ -105,6 +105,24 @@ try {
 }
 ```
 
+## Type checking errors
+
+DO NOT use `instanceof` when checking for the type of an error. Instead, use the `error.name` or `error.code` in your error handling logic:
+
+```javascript
+try {
+    readFile(input);
+} catch (error) {
+    if (error.name === 'ParsingError') {
+        return 'Invalid file format';
+    }
+    if (error.code === 'ENOENT') {
+        return null;
+    }
+    throw error;
+}
+```
+
 ## Private class members
 
 Use ES2022 `#` private fields and methods. Never use underscore prefixes:
