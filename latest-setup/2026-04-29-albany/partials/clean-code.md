@@ -1,6 +1,6 @@
-# Refactoring for Clean Code
+# Writing Clean Code
 
-Ensure that you are writing and refactoring code for maintainability.
+Clean code is code which is easy for you to maintain in the future. This is how you write clean code in this project:
 
 **Lean into Object Oriented Programming (OOP).**
 
@@ -18,9 +18,7 @@ When you encounter procedural code, shift your focus from how a task is done to 
 
 **Use encapsulation**
 
-In perfect code, each object is completely independent of the others: You could work in any of the objects without knowing anything about any of the other objects.
-
-Encapsulation is also known as "information hiding". The information hidden within a module usually consists of details about how to implement some mechanism which other parts of the system don't need to know about.
+In perfect code, each object is completely independent of the others: You could work in any of the objects without knowing anything about any of the other objects. That is why encapsulation is also known as "information hiding".
 
 Encapsulate your code in two ways:
 
@@ -42,18 +40,16 @@ Low level adapters and drivers should be separated from general purpose domain c
 
 **Smaller modules, classes, and methods are NOT always better.**
 
-Creating small classes, methods, and functions is NOT your goal when writing or refactoring code; making the code simpler is your goal. There are times when you should bring code together to make it simpler instead of decomposing it.
+Creating small classes, methods, and functions is NOT your goal when writing or refactoring code; making the code simpler is your goal. These are scenarios when you should bring code together to make it simpler instead of making it smaller:
 
-Bringing pieces of code together when:
-
-- They share information; for example, both pieces of code might depend on information about a common protocol.
-- They are used together: anyone using one of the pieces of code is likely to use the other as well.
-- They overlap conceptually, in that there is a simple higher-level category that includes both of the pieces of code.
-- It is hard to understand one of the pieces of code without looking at the other.
+- Shared information: Separate pieces of code might depend on information about a common protocol.
+- Used together: Using one of the pieces of code is likely to use the other as well.
+- Overlap conceptually: There is a simple higher-level category that includes both of the pieces of code.
+- Related: It is hard to understand one of the pieces of code without looking at the other.
 
 **No thin wrapper classes.**
 
-Avoid writing classes which are just thin wrappers over some data with getters and setters.
+Do not create or write classes which are thin wrappers over some data with getters and setters.
 
 This is bad:
 
@@ -119,14 +115,14 @@ function createDog(args) {
 }
 ```
 
-**Methods and functions should do one thing.**
+**Methods and functions should have one clear responsibility.**
 
-The methods and functions you write should do one thing and only that thing.
+A method or function should have one reason to exist. It may contain several statements, but those statements should all work together at the same level of abstraction to accomplish one named responsibility.
 
-A method should change the state of an object, or it should return some information about that object.
+Do not mix high-level workflow with low-level details in the same function. Keep the public method focused on the workflow, and move detailed parsing, formatting, persistence, or validation steps into well-named helpers when that makes the code easier to read.
 
-In order to make sure our functions are doing one thing, you need to make sure that the statements within your method are all at the same level of abstraction.
-
+A method should usually either change the state of an object or return information about that object. Avoid methods that both mutate state and return computed information, unless the combined behavior is the clearest API and the method name makes the side effect obvious.
+  
 **Minimize the number of arguments for methods and functions.**
 
 Use the fewest number of arguments to a method or function as possible. More than three arguments should not be used. When a method seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class or object of their own.

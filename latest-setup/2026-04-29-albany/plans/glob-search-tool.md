@@ -98,3 +98,24 @@ A `GlobSearchTool` class in `lib/tools/glob-search-tool.js` follows the same san
   - **Where**: `test/lib/tools/glob-search-tool-test.js`
   - **Acceptance criteria**: One `it` case; verifies extension filtering and sort order
   - **Depends on**: Tests — maxResults truncation, Glob matching and sorted return value
+
+- [x] **Add description and input_schema class fields**
+  - **Story**: Claude knows when and how to call the tool; API payload has a complete schema
+  - **What**: Add a `description` string field (multi-line, array-joined) and an `input_schema` JSON Schema object field to `GlobSearchTool`. Schema declares `pattern` and `root` as required non-empty strings. Also add the description to the `glob_search_tool` entry in `claude-tool-adapter.js`.
+  - **Where**: `lib/tools/glob-search-tool.js`, `lib/anthropic-claude/claude-tool-adapter.js`
+  - **Acceptance criteria**: Both fields are accessible on a constructed instance; adapter registry no longer has an empty description
+  - **Depends on**: Glob matching and sorted return value
+
+- [x] **Add execute() entry point with ValidationError aggregation**
+  - **Story**: Agent receives all field errors in one response rather than one at a time
+  - **What**: Add `async execute(input)` to `GlobSearchTool`. Destructure `{ pattern, root }` from `input ?? {}`. Create a `ValidationError`, push a failure for each non-string or empty field, throw if any were pushed. On success, call `glob(pattern, root)` and return `JSON.stringify(result)`.
+  - **Where**: `lib/tools/glob-search-tool.js`
+  - **Acceptance criteria**: Passing both fields bad yields one `ValidationError` with two entries in `errors`; a valid call returns a JSON string containing `paths` and `truncated`
+  - **Depends on**: Add description and input_schema class fields
+
+- [x] **Tests — tool shape and execute()**
+  - **Story**: Confidence that the agent-facing surface is correct
+  - **What**: Add `tool shape` describe block verifying `description` and `input_schema`. Add `execute()` describe block covering: all-fields-bad aggregation, null input, individual field rejections, undefined fields, success path returning a valid JSON string, and `BadRequestError`/`ForbiddenError` propagation.
+  - **Where**: `test/lib/tools/glob-search-tool-test.js`
+  - **Acceptance criteria**: Tests mirror the coverage added for `EditTool#execute`
+  - **Depends on**: Add execute() entry point with ValidationError aggregation
