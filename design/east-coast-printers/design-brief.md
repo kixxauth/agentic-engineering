@@ -2,8 +2,6 @@
 
 **Client:** East Coast Printers
 **Region:** Vermont & New England
-**Version:** 1.0
-**Deadline:** TBD
 
 ---
 
@@ -14,6 +12,8 @@
 **Primary CTA:** Every page should make it frictionless for visitors to call or email directly. The phone number and email address must be prominent and persistent throughout the site.
 
 **Conversion Model:** Quote and inquiry form only — no direct purchasing or checkout. The site's job is to capture intent and hand off to the sales team.
+
+**Formats:** Mobile first design. Many users will be accessing the site from a mobile device.
 
 **Success Metrics:** The redesign will be measured by a reduction in bounce rate and an improvement in conversion rate — specifically, the percentage of visitors who submit a quote request or initiate direct contact.
 
@@ -45,8 +45,6 @@
 | Secondary | Burgundy | `#64324D` |
 | Required Background | White | `#FFFFFF` |
 
-> **Note:** The secondary color (#64324D) reads as a burgundy/wine in practice rather than a true red. Confirm with the client whether this is intentional before finalizing.
-
 **Logo:**
 - Hosted at: `https://kixx.imgix.net/nydynamo/objects/4ef58a2cf1c1a35f4478d23076cec5514869f9f1c53325e2ab4b530eab49adf7`
 - ⚠️ The logo must always appear on a white (#FFFFFF) background. Do not place it over colors, gradients, or photography.
@@ -62,10 +60,3 @@
 **Design Benchmark:** The redesign should follow the general aesthetic of Chicago Signs (https://chicagosigns.com). Use it as a reference for tone, layout clarity, and professional presentation — not as a template to replicate.
 
 **What to borrow:** clean structured layout, clear service categories, prominent contact CTAs, and professional use of photography.
-
----
-
-## 5. Open Items
-
-- **Current website URL:** Not yet provided. The designer should request this to audit the existing site before beginning work.
-- **Project timeline:** Deadline is TBD. Client to confirm before kickoff. The timeline should account for at least one round of feedback on initial concepts.
